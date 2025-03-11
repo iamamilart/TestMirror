@@ -21,4 +21,5 @@ jobs:
       - name: Push to GitHub
         run: |
           cd bitbucket-repo
-          git push --mirror github
+          git push --mirror --force github
+
