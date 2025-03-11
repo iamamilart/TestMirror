@@ -1,0 +1,24 @@
+name: Sync Bitbucket to GitHub
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Runs every hour (adjust as needed)
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v4
+
+      - name: Clone Bitbucket Repository
+        run: |
+          git clone --mirror https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@${{ secrets.BITBUCKET_URL }}/${{ secrets.BITBUCKET_REPO }}.git bitbucket-repo
+          cd bitbucket-repo
+          git remote add github https://github.com/${{ github.repository }}.git
+
+      - name: Push to GitHub
+        run: |
+          cd bitbucket-repo
+          git push --mirror github
