@@ -16,7 +16,7 @@ jobs:
         run: |
           git clone --mirror https://${{ secrets.BITBUCKET_USERNAME }}:${{ secrets.BITBUCKET_APP_PASSWORD }}@bitbucket.org/${{ secrets.BITBUCKET_REPO }}.git bitbucket-repo
           cd bitbucket-repo
-          git remote add github https://x-access-token:${{ secrets.GITHUB_PAT }}@github.com/${{ github.repository }}.git
+          git remote add github https://x-access-token:${{ secrets.Secret_GITHUB_PAT }}@github.com/${{ github.repository }}.git
 
       - name: Push to GitHub
         run: |
