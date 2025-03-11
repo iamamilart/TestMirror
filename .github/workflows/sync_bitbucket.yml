@@ -20,6 +20,8 @@ jobs:
 
       - name: Push to GitHub
         run: |
+         
           cd bitbucket-repo
-          git push --mirror --force github
+          git push github --all  # Push all branches
+          git push github --tags  # Push all tags
 
